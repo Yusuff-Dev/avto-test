@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a.active{
+    background-color: #bfdbfe;
+}
+
+.slider-container {
+    width: 80%;
+    margin: auto;
+  }
+  
+  /* .slide {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+  } */
+  
+  .slick-dots li button:before {
+    color: #000; 
+    background-color: red;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    color: black; 
+  }
+  
