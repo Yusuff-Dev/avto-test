@@ -4,7 +4,8 @@ import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 const SliderComponent = ({ variant }) => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [answered, setAnswered] = useState({});
+
 
     const handlePrev = () => {
         setActiveIndex((prevIndex) => (prevIndex === 0 ? variant.length - 1 : prevIndex - 1));
@@ -18,9 +19,21 @@ const SliderComponent = ({ variant }) => {
         setActiveIndex(index);
     };
 
-    const checkAnswers = (item) => {
-        setIsDisabled(true);
-        console.log(item);
+    const checkAnswers = (item, index, activeIndex) => {
+        setAnswered((prevAnswered) => ({ ...prevAnswered, [activeIndex]: index }));
+    }
+
+    const isAnswered = (index) => {
+        return answered[index] !== undefined;
+    }
+
+    const color = (index, activeIndex) => {
+        if (answered[activeIndex] !== undefined) {
+            if (index == answered[activeIndex]) {
+                return variant[activeIndex].questions[index].is_true ? '#43A047' : '#E53935';
+            }
+            return variant[activeIndex].questions[index].is_true ? '#43A047' : '';
+        }
     }
 
     if (variant === null) return null;
@@ -41,12 +54,21 @@ const SliderComponent = ({ variant }) => {
 
                 {/* shu yerda ishlayabman */}
                 <div className="flex flex-col gap-2 md:w-1/3 sm:w-1/2 w-full">
+
                     {
                         variant[activeIndex].questions.map((answer, index) => (
                             <button
-                                disabled={isDisabled}
-                                onClick={() => checkAnswers(answer, index)}
-                                key={index} className={`disabled:btn-error  btn rounded-sm border-blue-900 text-blue-900`}>
+                                disabled={isAnswered(activeIndex)}
+                                onClick={() => checkAnswers(answer, index, activeIndex)}
+                                key={index}
+                                className={`btn rounded-sm border-blue-900 text-blue-900 `}
+                                style={
+                                    {
+                                        background: color(index, activeIndex),
+                                        border: '1px solid #000',
+                                    }
+                                }
+                            >
                                 {answer.question_ru}
                             </button>
                         ))
@@ -66,6 +88,12 @@ const SliderComponent = ({ variant }) => {
             <div className="flex flex-wrap gap-1 items-center justify-center">
                 {variant.map((_, index) => (
                     <button
+                    // style={
+                    //     {
+                    //         background: color(index, activeIndex),
+                    //         border: '1px solid #000',
+                    //     }
+                    // }
                         key={index}
                         className={`w-10 py-2 border rounded-sm btn border-blue-900 text-blue-900 ${index === activeIndex ? 'scale-110' : ''}`}
                         onClick={() => handlePaginationClick(index)}
@@ -79,3 +107,4 @@ const SliderComponent = ({ variant }) => {
 };
 
 export default SliderComponent;
+

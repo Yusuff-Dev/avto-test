@@ -6,24 +6,15 @@ a.active{
     background-color: #bfdbfe;
 }
 
-.slider-container {
-    width: 80%;
-    margin: auto;
-  }
-  
-  /* .slide {
-    border: 1px solid #ddd;
-    padding: 20px;
-    text-align: center;
-  } */
-  
-  .slick-dots li button:before {
-    color: #000; 
-    background-color: red;
-  }
-  
-  .slick-prev:before,
-  .slick-next:before {
-    color: black; 
-  }
+.correct{
+  color: white ;
+  background: #16a34a ;
+  border: 1px solid #16a34a ;
+}
+
+.wrong{
+  color: white ;
+  background: #e3342f ;
+  border: 1px solid #e3342f ; 
+}
   
