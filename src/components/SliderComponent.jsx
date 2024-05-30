@@ -27,7 +27,6 @@ const SliderComponent = ({ variant }) => {
     };
 
     const checkAnswers = (item, index, activeIndex) => {
-        console.log(variant.length,);
         setAnswered((prevAnswered) => ({ ...prevAnswered, [activeIndex]: index }));
         if (item.is_true) {
             setTrueCount((prevTrueCount) => prevTrueCount + 1);
@@ -97,7 +96,7 @@ const SliderComponent = ({ variant }) => {
                 </div>
                 <h2 className="text-xl font-bold">{getTranslationValue(variant[activeIndex], "name")}</h2>
                 {
-                    variant[activeIndex].image && <div className='w-full h-[400px]'>
+                    variant[activeIndex].image && <div className='w-full max-h-[400px]'>
                         <img
                             src={variant[activeIndex].image}
                             alt={variant[activeIndex].image}
@@ -119,7 +118,7 @@ const SliderComponent = ({ variant }) => {
                                 color: isAnswered(activeIndex) || timeEnded ? '#000' : '#1e3a8a'
                             }}
                         >
-                            {getTranslationValue(answer,"question")}
+                            {getTranslationValue(answer, "question")}
                         </button>
                     ))}
                 </div>

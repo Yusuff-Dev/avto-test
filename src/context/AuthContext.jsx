@@ -1,16 +1,17 @@
 import { createContext, useState, useContext } from "react";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify"; 
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const URL = 'http://89.104.68.209:8012/api/v1'
-    const [isLoggedin, setIsLoggedin] = useState(localStorage.getItem('quizToken') || false);
+    const [isLoggedin, setIsLoggedin] = useState(localStorage.getItem('quizToken')? true : false);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         phone: '',
         password: ''
     });
+
 
     const { phone, password } = formData;
 
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         }))
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, fn) => {
         e.preventDefault();
         setLoading(true);
 
@@ -39,11 +40,12 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 window.localStorage.setItem('quizToken', data.token);
                 setIsLoggedin(true);
-                toast.success('Hush kelibsiz');
                 setFormData({
-                    name: '',
-                    email: ''
+                    phone: '',
+                    password: ''
                 });
+                fn('/');
+                toast.success('Hush kelibsiz.');
             } else {
                 toast.error(data.error);
             }
@@ -58,6 +60,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         window.localStorage.clear();
         setIsLoggedin(false);
+        toast.warning('Profildan chiqib ketdingiz.');
     }
 
 

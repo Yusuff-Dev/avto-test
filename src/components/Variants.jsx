@@ -7,7 +7,7 @@ function Variants() {
     useEffect(() => { fetchVariants() }, []);
     if (!variants || variants.length === 0) return null;
     return (
-        <div className="px-5 w-full">
+        <div className="container">
             <Variant variants={variants} />
         </div>
     )

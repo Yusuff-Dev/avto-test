@@ -2,17 +2,18 @@ import { useAuth } from '../context/AuthContext';
 import Logo from '../components/Logo';
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { TbPasswordMobilePhone } from "react-icons/tb";
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
     const { handleChange, handleSubmit, phone, password } = useAuth();
-
+    const navigate = useNavigate();
     return (
         <div className='flex items-center justify-center h-screen container mx-auto'>
             <form
-                onSubmit={handleSubmit}
+                onSubmit={(data) => handleSubmit(data, (path) => navigate(path))}
                 className='basis-[400px] flex flex-col gap-4 shadow-md py-6 px-4 relative'>
-                <div className='w-36 mx-auto'> 
-                <Logo/>
+                <div className='w-36 mx-auto'>
+                    <Logo />
                 </div>
                 <label className="input input-bordered flex items-center gap-2">
                     <div>

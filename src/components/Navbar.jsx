@@ -9,7 +9,7 @@ import LogOut from './LogOut';
 function Navbar() {
     const { active, setActive, getTranslation } = useCustomContext();
     return (
-        <nav className="bg-white py-2 shadow-md sticky top-0">
+        <nav className="bg-white py-2 shadow-md sticky top-0 z-50">
             <div className="container flex items-center justify-between">
                 <div className='w-16'>
                     <Logo />
@@ -41,15 +41,19 @@ function Navbar() {
                     </button>
                 </div>
             </div>
-            <div className={`${active ? 'scale-y-0' : 'scale-y-1'} origin-top duration-300 absolute w-full bottom-0 translate-y-full bg-white shadow-md pb-5 rounded-b-lg md:hidden`}>
+            <div className={`${active ? 'h-0 ' : 'h-[150px]'} overflow-hidden origin-top duration-200 absolute w-full bottom-0 translate-y-full bg-white shadow-md rounded-b-lg md:hidden`}>
                 <div className="container flex flex-col gap-5">
                     <div className="flex flex-col justify-center gap-5 items-start">
-                        <NavLink to='/' className={`flex items-center uppercase text-blue-900 font-semibold`}>
+                        <NavLink
+                        onClick={() => setActive(!active)}
+                        to='/' className={`flex items-center uppercase text-blue-900 font-semibold`}>
                             {
                                 getTranslation('templates')
                             }
                         </NavLink>
-                        <NavLink to='/test' className={`flex items-center uppercase text-blue-900 font-semibold`}>
+                        <NavLink 
+                        onClick={() => setActive(!active)}
+                        to='/test' className={`flex items-center uppercase text-blue-900 font-semibold`}>
                             {
                                 getTranslation('exam')
                             }

@@ -3,11 +3,14 @@ import { useCustomContext } from "../context/TestContext";
 import { useAuth } from "../context/AuthContext";
 
 function LogOut() {
-    const {handleLogout} = useAuth();
-    const {getTranslation} = useCustomContext();
+    const { logout } = useAuth();
+    const { getTranslation } = useCustomContext();
+    const handleLogout = () => {
+        logout();
+    }
     return (
         <button
-        onClick={handleLogout}
+            onClick={handleLogout}
             className="flex items-center gap-1 text-blue-900 uppercase font-semibold">
             <MdLogout size={24} /> {
                 getTranslation('logout')

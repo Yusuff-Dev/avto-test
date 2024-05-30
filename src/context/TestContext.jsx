@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { toast } from 'react-toastify';
 
 const TestContext = createContext(null);
 
@@ -62,8 +61,6 @@ const ContextProvider = ({ children }) => {
     const getTranslationValue = (item, key) => {
         return lang == 'uz' ? item[key + '_uz'] : item[key + '_ru']
     }
-
-
 
     return (
         <TestContext.Provider

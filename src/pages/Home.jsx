@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom"
-import Navbar from "../components/Navbar"
+import Variants from '../components/Variants'
 
 function Home() {
   return (
     <div>
-      <Navbar />
-      {/* <Outlet/> */}
+      <Variants/>
+      <Outlet />
     </div>
   )
 }
