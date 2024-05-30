@@ -96,7 +96,7 @@ const SliderComponent = ({ variant }) => {
                 </div>
                 <h2 className="text-xl font-bold">{getTranslationValue(variant[activeIndex], "name")}</h2>
                 {
-                    variant[activeIndex].image && <div className='w-full max-h-[400px]'>
+                    variant[activeIndex].image && <div className='w-full  md:h-[400px]'>
                         <img
                             src={variant[activeIndex].image}
                             alt={variant[activeIndex].image}
