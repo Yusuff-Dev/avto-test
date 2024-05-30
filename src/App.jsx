@@ -1,18 +1,21 @@
-import Hero from "./components/Hero";
-import SignIn from "./components/SignIn"
-import { useCustomContext } from "./context/TestContext";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/Routes";
 
 function App() {
-  const { isLoggedin } = useCustomContext();
-
   return (
-    <>
-      {
-        isLoggedin ? <Hero /> :
-          <SignIn />
-      }
-    </>
+    <RouterProvider router={router}></RouterProvider>
   )
 }
 
 export default App
+
+// <Routes>
+    //   <Route element={<PrivateRoute />}>
+    //     <Route path="/" element={<Navbar />} />
+    //     <Route path="/variants/:id" element={<VariantDetail />} />
+    //     <Route path="/test" element={<RandomTest />} />
+    //   </Route>
+    //   <Route path="/login" element={<SignIn />} />
+    //   <Route path="*" element={<NotFound />} />
+    // </Routes>
+

@@ -1,0 +1,35 @@
+{
+    "login":{
+        "ru":"Вход",
+        "uz":"Kirish"
+    },
+    "logout":{
+        "ru":"Выход",
+        "uz":"Chiqish"
+    },
+    "exam":{
+        "ru":"Экзамен",
+        "uz":"Imtihon"
+    },
+    "test":{
+        "ru":"Тест",
+        "uz":"Test"
+    },
+    "time_end":
+    {
+        "ru":"Время истекло! ",
+        "uz":"Vaqt tugadi! "
+    },
+    "result":
+    {
+        "ru":"Результат: ",
+        "uz":"Natija: "
+    },
+    "templates":
+    {
+        "ru":"Шаблоны",
+        "uz":"Shablonlar"
+    }
+
+
+}

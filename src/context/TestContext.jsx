@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 
 const TestContext = createContext(null);
@@ -7,60 +7,6 @@ const ContextProvider = ({ children }) => {
     // https://oqdevpy.pythonanywhere.com/api/v1/random-test/?token=wRukw0fIIM
     const [active, setActive] = useState(true);
     const URL = 'http://89.104.68.209:8012/api/v1'
-    const [isLoggedin, setIsLoggedin] = useState(localStorage.getItem('quizToken') || false);
-    const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({
-        phone: '',
-        password: ''
-    });
-
-    const { phone, password } = formData;
-
-    const handleChange = (e) => {
-        setFormData((prev) => ({
-            ...prev,
-            [e.target.id]: e.target.value
-        }))
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-
-        try {
-            const response = await fetch(`${URL}/login/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ phone, password }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                localStorage.setItem('quizToken', data.token);
-                setIsLoggedin(true);
-                toast.success('Hush kelibsiz');
-                setFormData({
-                    name: '',
-                    email: ''
-                });
-            } else {
-                toast.error(data.error);
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // logout functions
-    const handleLogout = () => {
-        localStorage.clear();
-        setIsLoggedin(false);
-    }
 
     //variants
     const [variants, setVariants] = useState(null);
@@ -77,22 +23,63 @@ const ContextProvider = ({ children }) => {
         setVariant(data);
     }
 
+    // random tests 
+
+    const [randomTests, setRandomTests] = useState(null);
+    const fetchRandomTests = async () => {
+        const res = await fetch(`${URL}/random-test/?token=${localStorage.getItem('quizToken')}`);
+        const data = await res.json();
+        setRandomTests(data);
+    }
+
+    // lang
+    const [lang, setLang] = useState(localStorage.getItem('lang') || 'uz');
+    const changeLang = (lang) => {
+        setLang(lang);
+        localStorage.setItem('lang', lang);
+    }
+
+    // get translation
+    const [translations, setTranslations] = useState({});
+
+    useEffect(() => {
+        const fetchTranslations = async () => {
+            try {
+                const response = await fetch('/translations.json');
+                const data = await response.json();
+                setTranslations(data);
+            } catch (error) {
+                console.error("Error fetching translations:", error);
+            }
+        };
+
+        fetchTranslations();
+    }, []);
+    const getTranslation = (key) => {
+        return translations[key] ? translations[key][lang] : key;
+    };
+
+    const getTranslationValue = (item, key) => {
+        return lang == 'uz' ? item[key + '_uz'] : item[key + '_ru']
+    }
+
+
+
     return (
         <TestContext.Provider
             value={{
-                handleSubmit,
-                handleChange,
-                phone,
-                password,
-                isLoggedin,
-                loading,
-                handleLogout,
                 active,
                 setActive,
                 variants,
                 fetchVariants,
                 fetchVariant,
-                variant
+                variant,
+                randomTests,
+                fetchRandomTests,
+                lang,
+                changeLang,
+                getTranslation,
+                getTranslationValue
             }}
         >
             {children}

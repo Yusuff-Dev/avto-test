@@ -8,7 +8,7 @@ import LogOut from './LogOut'
 import Lang from "./Lang";
 
 function Sidebar() {
-    const { active, setActive } = useCustomContext();
+    const { active, setActive, getTranslation } = useCustomContext();
     return (
         <div className={`bg-white p-4 sticky top-0 pt-10 h-screen shadow-lg rounded-r-xl flex flex-col gap-5 ${active && 'w-[250px]'}`}>
             <div className="flex items-center justify-between">
@@ -24,13 +24,13 @@ function Sidebar() {
             <NavLink to='/' className={`flex items-center gap-2 uppercase text-blue-900 font-semibold rounded-md p-2`}>
                 <GiBookshelf size={32} />
                 {
-                    active && 'Shablonlar'
+                    active && getTranslation('templates')
                 }
             </NavLink>
             <NavLink to='/test' className={`flex items-center gap-2 uppercase text-blue-900 font-semibold rounded-md p-2`}>
                 <IoSchoolSharp size={32} />
                 {
-                    active && 'Imtihon'
+                    active && getTranslation('exam')
                 }
             </NavLink>
             <div>

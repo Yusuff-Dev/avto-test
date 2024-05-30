@@ -6,7 +6,7 @@ import SliderComponent from './SliderComponent';
 function VariantDetail() {
     const param = useParams();
     const { fetchVariant, variant } = useCustomContext();
-    useEffect(() => { fetchVariant(param.id + 1) }, []);
+    useEffect(() => { fetchVariant(+param.id + 1) }, []);
     if (!variant || variant.length === 0) return null
     return (
         <SliderComponent variant={variant} />
