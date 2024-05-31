@@ -3,8 +3,8 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const TestContext = createContext(null);
 
 const ContextProvider = ({ children }) => {
-    // https://oqdevpy.pythonanywhere.com/api/v1/random-test/?token=wRukw0fIIM
     const [active, setActive] = useState(true);
+    const [loading, setLoading] = useState(true);
     const URL = 'http://89.104.68.209:8012/api/v1'
 
     //variants
@@ -13,6 +13,7 @@ const ContextProvider = ({ children }) => {
         const res = await fetch(`${URL}/test-variant/`);
         const data = await res.json();
         setVariants(data);
+        setLoading(false);
     }
 
     const [variant, setVariant] = useState(null);
@@ -20,6 +21,7 @@ const ContextProvider = ({ children }) => {
         const res = await fetch(`${URL}/test/?page=${index}&token=${localStorage.getItem('quizToken')}`);
         const data = await res.json();
         setVariant(data);
+        setLoading(false);
     }
 
     // random tests 
@@ -29,6 +31,7 @@ const ContextProvider = ({ children }) => {
         const res = await fetch(`${URL}/random-test/?token=${localStorage.getItem('quizToken')}`);
         const data = await res.json();
         setRandomTests(data);
+        setLoading(false);
     }
 
     // lang
@@ -76,7 +79,8 @@ const ContextProvider = ({ children }) => {
                 lang,
                 changeLang,
                 getTranslation,
-                getTranslationValue
+                getTranslationValue,
+                loading,
             }}
         >
             {children}

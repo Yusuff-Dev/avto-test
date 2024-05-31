@@ -7,7 +7,6 @@ import PrivateRoute from "../utils/PrivateRoute";
 import App from "../App";
 import Layout from "../pages/Layout";
 
-
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -28,5 +27,5 @@ export const router = createBrowserRouter([
     {
         path: '/login',
         element: <SignIn />
-    }
+    },
 ])
