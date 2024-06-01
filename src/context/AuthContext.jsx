@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const URL = 'http://89.104.68.209:8012/api/v1'
+    const URL = 'https://oqdevpy.pythonanywhere.com/api/v1';
     const [isLoggedin, setIsLoggedin] = useState(localStorage.getItem('quizToken')? true : false);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({

@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const TestContext = createContext(null);
 
 const ContextProvider = ({ children }) => {
     const [active, setActive] = useState(true);
     const [loading, setLoading] = useState(true);
-    const URL = 'http://89.104.68.209:8012/api/v1'
+    const URL = 'https://oqdevpy.pythonanywhere.com/api/v1';
 
     //variants
     const [variants, setVariants] = useState(null);
