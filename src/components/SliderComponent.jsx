@@ -105,13 +105,13 @@ const SliderComponent = ({ variant }) => {
                     </div>
                 }
 
-                <div className="flex flex-col gap-2 md:w-1/3 sm:w-1/2 w-full">
+                <div className="flex flex-col gap-2 md:w-1/2 sm:w-1/1 w-full">
                     {variant[activeIndex].questions.map((answer, index) => (
                         <button
                             disabled={isAnswered(activeIndex) || timeEnded}
                             onClick={() => checkAnswers(answer, index, activeIndex)}
                             key={index}
-                            className={`btn rounded-sm border-blue-900 text-blue-900 `}
+                            className={`btn h-auto p-2 rounded-sm border-blue-900 text-blue-900 `}
                             style={{
                                 background: color(index, activeIndex),
                                 border: '1px solid #000',
