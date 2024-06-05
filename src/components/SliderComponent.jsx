@@ -105,7 +105,7 @@ const SliderComponent = ({ variant }) => {
                     </div>
                 }
 
-                <div className="flex flex-col gap-2 md:w-1/2 sm:w-1/1 w-full">
+                <div className="flex flex-col gap-2 md:w-1/3 sm:w-1/2 w-full">
                     {variant[activeIndex].questions.map((answer, index) => (
                         <button
                             disabled={isAnswered(activeIndex) || timeEnded}
